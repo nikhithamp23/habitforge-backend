@@ -13,6 +13,7 @@ import { friendsRouter } from "./routes/friends.routes.js";
 import { notFound, errorHandler } from "./middleware/errorHandler.js";
 
 export function createApp() {
+  const 
   app.use(cors({
   origin: true,
   credentials: true
@@ -20,7 +21,6 @@ export function createApp() {
  
   app.set("trust proxy", 1);
   app.use(helmet({ crossOriginResourcePolicy: false }));
-  app.use(cors());
 
   // Generous global limit plus a tight one on auth, since login/register are
   // the routes most worth slowing down for a brute-force attempt.
