@@ -1,3 +1,4 @@
+const cors = require('cors');
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
@@ -13,12 +14,14 @@ import { friendsRouter } from "./routes/friends.routes.js";
 import { notFound, errorHandler } from "./middleware/errorHandler.js";
 
 export function createApp() {
-  const app = express();
-
+  app.use(cors({
+  origin: '*',
+  credentials: true
+}));
+ 
   app.set("trust proxy", 1);
-  app.use(helmet());
-  app.use(cors({ origin: env.clientOrigins, credentials: true }));
-  app.use(express.json({ limit: "100kb" }));
+  app.use(helmet({ crossOriginResourcePolicy: false }));
+  app.use(cors());
 
   // Generous global limit plus a tight one on auth, since login/register are
   // the routes most worth slowing down for a brute-force attempt.
