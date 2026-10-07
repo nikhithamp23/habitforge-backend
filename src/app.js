@@ -1,4 +1,4 @@
-const cors = require('cors');
+import cors from "cors";
 import express from "express";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
