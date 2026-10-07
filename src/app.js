@@ -1,6 +1,5 @@
 const cors = require('cors');
 import express from "express";
-import cors from "cors";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import { env } from "./config/env.js";
@@ -15,7 +14,7 @@ import { notFound, errorHandler } from "./middleware/errorHandler.js";
 
 export function createApp() {
   app.use(cors({
-  origin: '*',
+  origin: true,
   credentials: true
 }));
  
