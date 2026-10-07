@@ -13,7 +13,7 @@ import { friendsRouter } from "./routes/friends.routes.js";
 import { notFound, errorHandler } from "./middleware/errorHandler.js";
 
 export function createApp() {
-  const 
+  const app = express(); 
   app.use(cors({
   origin: true,
   credentials: true
