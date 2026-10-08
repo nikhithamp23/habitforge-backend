@@ -1,5 +1,5 @@
+import express from "express"; 
 import cors from "cors";
-import express from "express";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import { env } from "./config/env.js";
@@ -11,16 +11,13 @@ import { badgesRouter } from "./routes/badges.routes.js";
 import { billingRouter } from "./routes/billing.routes.js";
 import { friendsRouter } from "./routes/friends.routes.js";
 import { notFound, errorHandler } from "./middleware/errorHandler.js";
-
 export function createApp() {
-  const app = express(); 
-  app.use(cors({
-  origin: true,
-  credentials: true
-}));
- 
+  const app = express();
+
   app.set("trust proxy", 1);
   app.use(helmet({ crossOriginResourcePolicy: false }));
+  app.use(cors({ origin: true, credentials: true }));
+  app.use(express.json());
 
   // Generous global limit plus a tight one on auth, since login/register are
   // the routes most worth slowing down for a brute-force attempt.
@@ -42,3 +39,4 @@ export function createApp() {
   app.use(errorHandler);
   return app;
 }
+

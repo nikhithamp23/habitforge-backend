@@ -41,13 +41,13 @@ export function parseRegisterInput(body = {}) {
   const name = String(body.name ?? "").trim();
   const email = String(body.email ?? "").trim().toLowerCase();
   const password = String(body.password ?? "");
-  const timezone = body.timezone ?? "UTC";
+  const tz = body.timezone === "Asia/Calcutta" ? "Asia/Kolkata" : body.timezone;
 
   if (name.length < 1 || name.length > 60) throw bad("Name must be 1 to 60 characters.");
   if (!EMAIL.test(email) || email.length > 254) throw bad("Enter a valid email address.");
   if (password.length < 8 || password.length > 72) throw bad("Password must be 8 to 72 characters.");
-  if (!isValidTimezone(timezone)) throw bad("Timezone must be a valid IANA name such as Asia/Kolkata.");
-  return { name, email, password, timezone };
+  if (!isValidTz(tz)) throw bad("Tz must be a valid IANA name such as Asia/Kolkata.");
+  return { name, email, password, tz };
 }
 
 export function clampInt(value, min, max, fallback) {
