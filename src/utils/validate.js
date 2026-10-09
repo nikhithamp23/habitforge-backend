@@ -1,5 +1,14 @@
 import { HttpError } from "./httpError.js";
 import { isValidTimezone } from "./dates.js";
+function isValidTz(tz) {
+  if (typeof tz !== "string" || !tz) return false;
+  try {
+    new Intl.DateTimeFormat("en-US", { timeZone: tz });
+    return true;
+  } catch {
+    return false;
+  }
+}
 
 const bad = (message) => new HttpError(400, message, "VALIDATION");
 const COLOR = /^#[0-9a-fA-F]{6}$/;
